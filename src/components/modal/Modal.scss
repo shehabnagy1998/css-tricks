@@ -1,0 +1,127 @@
+$blue: #007bff;
+
+.page {
+    position: relative;
+    z-index: 8;
+    display: flex;
+    justify-content: center;
+    margin: 20vh 5vw;
+    flex-flow: row nowrap;
+
+    #checker {
+        display: none;
+    }
+
+    .opener {
+        position: relative;
+        padding: 10px 40px;
+        font-size: 1.5rem;
+        color: white !important;
+        background: $blue;
+        border: solid 1px #ddd;
+        outline: none;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: -6px 6px $blue - #222;
+
+        &:active {
+            top: 3px;
+            left: -3px;
+            box-shadow: -3px 3px $blue - #222;
+        }
+    }
+}
+
+.modal-container {
+    position: fixed;
+    width: 80vw;
+    height: 80vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(.5);
+    z-index: 12;
+    background: white;
+    border-radius: 15px;
+    transition: all .5s .1s;
+    opacity: 0;
+    pointer-events: none;
+
+    @media screen and (min-width: 992px) {
+        width: 60%;
+    }
+
+    .modal-header {
+        border-bottom: solid 1px #ddd;
+        font-size: 1.8rem;
+        text-transform: capitalize;
+
+        @media screen and (min-width: 992px) {
+            font-size: 3rem;
+        }
+    }
+
+    .modal-body {
+        font-size: .9rem;
+        margin: 2vh 2vw;
+        overflow-y: auto;
+        height: 73%;
+
+        @media screen and (min-width: 992px) {
+            font-size: 1rem;
+            height: 65%;
+        }
+    }
+
+    .modal-actions {
+        margin: 3vh 4vw 3vh;
+        display: flex;
+        justify-content: flex-end;
+
+        @media screen and (min-width: 992px) {
+            margin: 4vh 4vw 3vh;
+        }
+
+        a {
+            padding: 10px 20px;
+            color: white;
+            background: $blue;
+            border: solid 1px #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            outline: none;
+
+            &:hover {
+                color: white;
+                background: $blue - #111;
+            }
+        }
+    }
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .8);
+    z-index: 10;
+    pointer-events: none;
+    transform: scale(.5);
+    opacity: 0;
+    transition: all .5s;
+}
+
+#checker:checked {
+    &~.overlay {
+        pointer-events: auto;
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    &~.modal-container {
+        pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
