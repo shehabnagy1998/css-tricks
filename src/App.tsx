@@ -1,11 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import './App.scss';
+import { Switch, Route } from 'react-router-dom';
+
+const BrokenImage = lazy(() => import('./components/broken-image/BrokenImage'));
 
 class App extends Component {
   render() {
+
+    const loader = <div className="d-flex justify-content-center mt-5">
+      <div className="spinner-border text-primary"></div>
+    </div>
+
     return (
-      <div className="App d-flex justify-content-center">
-        <code className="display-1">&lt;Awesome<i className="material-icons display-3">person</i> /&gt;</code>
+      <div className="App">
+        <Switch>
+          <Route exact path="/broken">
+            <Suspense fallback={loader}>
+              <BrokenImage />
+            </Suspense>
+          </Route>
+        </Switch>
       </div>
     );
   }
