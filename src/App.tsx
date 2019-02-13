@@ -14,9 +14,11 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Suspense fallback={loader}>
-            <Route path="/form"><Form /></Route>
-          </Suspense>
+          <Route path="/form">
+            <Suspense fallback={loader}>
+              <Form />
+            </Suspense>
+          </Route>
         </Switch>
       </div>
     );
